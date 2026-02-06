@@ -28,7 +28,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "unsafe-secret-key")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG") == "True"
+DEBUG = False
+
 
 
 MEDIA_URL="/media/"
@@ -38,7 +39,12 @@ STATIC_URL="/static/"
 STATIC_ROOT=os.path.join(BASE_DIR,"static")
 
 # Update ALLOWED_HOSTS to include Vercel and localhost
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '.vercel.app'
+]
+
 
 
 
@@ -52,10 +58,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'student_management_app',
+    'whitenoise.runserver_nostatic',
+
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -159,3 +170,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #    'student_management_app.EmailBackEnd.EmailBackEnd'
 # )
 # AUTHENTICATION_BACKENDS = ['student_management_app.EmailBackEnd.EmailBackEnd']
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
