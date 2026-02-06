@@ -24,10 +24,12 @@ AUTH_USER_MODEL = 'student_management_app.CustomUser'
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-t4s#&uwtrhsf7%%27vme+8zpzp@(hzj_vw8+dptr8dis%gd52v'
+SECRET_KEY = os.environ.get("SECRET_KEY", "unsafe-secret-key")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG") == "True"
+
 
 MEDIA_URL="/media/"
 MEDIA_ROOT=os.path.join(BASE_DIR,"media")
@@ -35,7 +37,9 @@ MEDIA_ROOT=os.path.join(BASE_DIR,"media")
 STATIC_URL="/static/"
 STATIC_ROOT=os.path.join(BASE_DIR,"static")
 
-ALLOWED_HOSTS = []
+# Update ALLOWED_HOSTS to include Vercel and localhost
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
+
 
 
 # Application definition
@@ -52,6 +56,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -59,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'student_management_project.urls'
 
@@ -153,4 +159,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #    'student_management_app.EmailBackEnd.EmailBackEnd'
 # )
 # AUTHENTICATION_BACKENDS = ['student_management_app.EmailBackEnd.EmailBackEnd']
-#
