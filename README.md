@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # College Management System
 
 Website:
@@ -189,3 +190,6 @@ Add Student Results From Staff Panel
 ![image](https://user-images.githubusercontent.com/52338664/131296269-0066e46d-7581-4a81-8d72-40ac8c5a2bf3.png)
 
 
+=======
+# CampusPro
+>>>>>>> e825783b8d443ae68260536123e3d39045086ed9
