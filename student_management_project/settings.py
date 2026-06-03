@@ -17,7 +17,7 @@ AUTH_USER_MODEL = 'student_management_app.CustomUser'
 # SECURITY
 SECRET_KEY = os.environ.get("SECRET_KEY", "unsafe-secret-key")
 
-DEBUG = True
+DEBUG = False
 
 
 # Allowed hosts
