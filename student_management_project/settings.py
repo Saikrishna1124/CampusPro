@@ -17,7 +17,7 @@ AUTH_USER_MODEL = 'student_management_app.CustomUser'
 # SECURITY
 SECRET_KEY = os.environ.get("SECRET_KEY", "unsafe-secret-key")
 
-DEBUG = False
+DEBUG = True
 
 
 # Allowed hosts
@@ -37,9 +37,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
-]
+STATICFILES_DIRS = []
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -141,3 +139,9 @@ USE_TZ = True
 
 # Default primary key
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Authentication Backends
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'student_management_app.EmailBackEnd.EmailBackEnd',
+]

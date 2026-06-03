@@ -359,27 +359,39 @@ class StudentResult(models.Model):
 # It's like trigger in database. It will run only when Data is Added in CustomUser model
 
 @receiver(post_save, sender=CustomUser)
-# Now Creating a Function which will automatically insert data in HOD, Staff or Student
 def create_user_profile(sender, instance, created, **kwargs):
-    # if Created is true (Means Data Inserted)
     if created:
-        # Check the user_type and insert the data in respective tables
-        if instance.user_type == 1:
+        user_type_str = str(instance.user_type)
+        if user_type_str == CustomUser.HOD:
             AdminHOD.objects.create(admin=instance)
-        if instance.user_type == 2:
+        elif user_type_str == CustomUser.STAFF:
             Staffs.objects.create(admin=instance)
-        if instance.user_type == 3:
-            Students.objects.create(admin=instance, course_id=Courses.objects.get(id=1), session_year_id=SessionYearModel.objects.get(id=1), address="", profile_pic="", gender="")
+        elif user_type_str == CustomUser.STUDENT:
+            if not Students.objects.filter(admin=instance).exists():
+                course = Courses.objects.first()
+                session_year = SessionYearModel.objects.first()
+                Students.objects.create(
+                    admin=instance,
+                    course_id=course,
+                    session_year_id=session_year,
+                    address="",
+                    profile_pic="",
+                    gender=""
+                )
     
 
 @receiver(post_save, sender=CustomUser)
 def save_user_profile(sender, instance, **kwargs):
-    if instance.user_type == 1:
-        instance.adminhod.save()
-    if instance.user_type == 2:
-        instance.staffs.save()
-    if instance.user_type == 3:
-        instance.students.save()
+    user_type_str = str(instance.user_type)
+    if user_type_str == CustomUser.HOD:
+        if hasattr(instance, 'adminhod'):
+            instance.adminhod.save()
+    elif user_type_str == CustomUser.STAFF:
+        if hasattr(instance, 'staffs'):
+            instance.staffs.save()
+    elif user_type_str == CustomUser.STUDENT:
+        if hasattr(instance, 'students'):
+            instance.students.save()
     
 
 

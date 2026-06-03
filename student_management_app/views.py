@@ -15,25 +15,19 @@ def loginUser(request):
 	return render(request, 'login_page.html')
 
 def doLogin(request):
-	
-	print("here")
 	email_id = request.GET.get('email')
 	password = request.GET.get('password')
-	# user_type = request.GET.get('user_type')
-	print(email_id)
-	print(password)
-	print(request.user)
+	
 	if not (email_id and password):
 		messages.error(request, "Please provide all the details!!")
 		return render(request, 'login_page.html')
 
-	user = CustomUser.objects.filter(email=email_id, password=password).last()
+	user = authenticate(request, username=email_id, password=password)
 	if not user:
 		messages.error(request, 'Invalid Login Credentials!!')
 		return render(request, 'login_page.html')
 
 	login(request, user)
-	print(request.user)
 
 	if user.user_type == CustomUser.STUDENT:
 		return redirect('student_home/')
@@ -56,11 +50,6 @@ def doRegistration(request):
 	password = request.GET.get('password')
 	confirm_password = request.GET.get('confirmPassword')
 
-	print(email_id)
-	print(password)
-	print(confirm_password)
-	print(first_name)
-	print(last_name)
 	if not (email_id and password and confirm_password):
 		messages.error(request, 'Please provide all the details!!')
 		return render(request, 'registration.html')
@@ -87,22 +76,20 @@ def doRegistration(request):
 		messages.error(request, 'User with this username already exists. Please use different username')
 		return render(request, 'registration.html')
 
-	user = CustomUser()
-	user.username = username
-	user.email = email_id
-	user.password = password
-	user.user_type = user_type
-	user.first_name = first_name
-	user.last_name = last_name
-	user.save()
-	
-	if user_type == CustomUser.STAFF:
-		Staffs.objects.create(admin=user)
-	elif user_type == CustomUser.STUDENT:
-		Students.objects.create(admin=user)
-	elif user_type == CustomUser.HOD:
-		AdminHOD.objects.create(admin=user)
-	return render(request, 'login_page.html')
+	try:
+		user = CustomUser.objects.create_user(
+			username=username,
+			email=email_id,
+			password=password,
+			user_type=user_type,
+			first_name=first_name,
+			last_name=last_name
+		)
+		messages.success(request, 'Registration Successful! Please Login.')
+		return render(request, 'login_page.html')
+	except Exception as e:
+		messages.error(request, f'Registration Failed: {e}')
+		return render(request, 'registration.html')
 
 	
 def logout_user(request):
