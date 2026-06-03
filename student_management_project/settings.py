@@ -24,7 +24,8 @@ DEBUG = False
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    ".vercel.app"
+    ".vercel.app",
+    "*"
 ]
 
 
@@ -101,11 +102,24 @@ TEMPLATES = [
 WSGI_APPLICATION = 'student_management_project.wsgi.application'
 
 
+import shutil
+
 # Database (SQLite)
+# In serverless environment like Vercel, the root filesystem is read-only.
+# We copy the db.sqlite3 to /tmp/ on startup so writes are permitted.
+if os.environ.get('VERCEL') == '1':
+    db_path = '/tmp/db.sqlite3'
+    if not os.path.exists(db_path):
+        source_db = BASE_DIR / 'db.sqlite3'
+        if os.path.exists(source_db):
+            shutil.copy2(source_db, db_path)
+else:
+    db_path = BASE_DIR / 'db.sqlite3'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': db_path,
     }
 }
 
