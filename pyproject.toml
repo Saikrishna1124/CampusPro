@@ -6,4 +6,5 @@ dependencies = [
     "Django==3.2.2",
     "gunicorn",
     "whitenoise",
+    "setuptools",
 ]
