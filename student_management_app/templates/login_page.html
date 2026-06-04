@@ -13,7 +13,7 @@
 	<style>
 		body {
 			min-height: 100vh;
-			background: radial-gradient(circle at 10% 20%, rgba(20, 24, 33, 1) 0%, rgba(32, 38, 52, 1) 90.1%);
+			background: radial-gradient(circle at 10% 20%, #fafaf9 0%, #edf2f7 90.1%);
 			font-family: 'Outfit', sans-serif;
 			margin: 0;
 			display: flex;
@@ -21,22 +21,37 @@
 		}
 
 		.navbar-custom {
-			background: rgba(15, 23, 42, 0.8) !important;
+			background: rgba(255, 255, 255, 0.8) !important;
 			backdrop-filter: blur(12px);
-			border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+			border-bottom: 1px solid rgba(15, 23, 42, 0.06);
 			z-index: 10;
 		}
 
 		.navbar-custom .navbar-brand {
-			color: #38bdf8 !important;
+			color: #d97706 !important;
 			font-weight: 700;
 			letter-spacing: 0.5px;
 			transition: all 0.3s;
 		}
 
 		.navbar-custom .navbar-brand:hover {
-			color: #0ea5e9 !important;
-			text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+			color: #b45309 !important;
+			text-shadow: 0 0 10px rgba(217, 119, 6, 0.15);
+		}
+
+		.btn-outline-warm {
+			color: #d97706 !important;
+			border-color: rgba(217, 119, 6, 0.4) !important;
+			background: transparent !important;
+			font-weight: 500;
+			transition: all 0.3s;
+		}
+
+		.btn-outline-warm:hover {
+			color: #ffffff !important;
+			border-color: #d97706 !important;
+			background: #d97706 !important;
+			box-shadow: 0 0 15px rgba(217, 119, 6, 0.15);
 		}
 
 		.login-wrapper {
@@ -53,43 +68,43 @@
 		.blob {
 			position: absolute;
 			border-radius: 50%;
-			filter: blur(80px);
+			filter: blur(90px);
 			z-index: 0;
-			opacity: 0.15;
+			opacity: 0.12;
 		}
 		.blob-1 {
 			top: 10%;
 			left: 15%;
 			width: 300px;
 			height: 300px;
-			background: #38bdf8;
+			background: #f59e0b;
 		}
 		.blob-2 {
 			bottom: 15%;
 			right: 10%;
 			width: 350px;
 			height: 350px;
-			background: #818cf8;
+			background: #f43f5e;
 		}
 
 		.login-card {
 			width: 100%;
 			max-width: 420px;
-			background: rgba(30, 41, 59, 0.45);
+			background: rgba(255, 255, 255, 0.8);
 			backdrop-filter: blur(20px);
 			-webkit-backdrop-filter: blur(20px);
-			border: 1px solid rgba(255, 255, 255, 0.08);
+			border: 1px solid rgba(15, 23, 42, 0.08);
 			border-radius: 20px;
 			padding: 40px 35px;
-			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+			box-shadow: 0 20px 40px rgba(15, 23, 42, 0.05);
 			z-index: 1;
 			position: relative;
 			transition: transform 0.3s, box-shadow 0.3s;
 		}
 
 		.login-card:hover {
-			border-color: rgba(56, 189, 248, 0.2);
-			box-shadow: 0 20px 40px rgba(56, 189, 248, 0.05);
+			border-color: rgba(217, 119, 6, 0.25);
+			box-shadow: 0 20px 40px rgba(217, 119, 6, 0.08);
 		}
 
 		.login-header {
@@ -98,14 +113,14 @@
 		}
 
 		.login-header h2 {
-			color: #f8fafc;
+			color: #0f172a;
 			font-weight: 700;
 			font-size: 1.8rem;
 			margin-bottom: 5px;
 		}
 
 		.login-header p {
-			color: #94a3b8;
+			color: #475569;
 			font-size: 0.9rem;
 		}
 
@@ -116,8 +131,8 @@
 
 		.illustration i {
 			font-size: 64px;
-			color: #38bdf8;
-			filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.3));
+			color: #d97706;
+			filter: drop-shadow(0 0 10px rgba(217, 119, 6, 0.2));
 		}
 
 		.form-group {
@@ -126,7 +141,7 @@
 		}
 
 		.form-group label {
-			color: #cbd5e1;
+			color: #334155;
 			font-weight: 500;
 			font-size: 0.85rem;
 			margin-bottom: 8px;
@@ -142,36 +157,43 @@
 		}
 
 		.form-control-custom {
-			background: rgba(15, 23, 42, 0.5) !important;
-			border: 1px solid rgba(255, 255, 255, 0.1) !important;
+			background: rgba(255, 255, 255, 0.9) !important;
+			border: 1px solid rgba(15, 23, 42, 0.15) !important;
 			border-radius: 10px !important;
 			padding: 12px 15px 12px 42px !important;
 			height: auto !important;
-			color: #f8fafc !important;
+			color: #0f172a !important;
 			font-size: 0.95rem;
 			transition: all 0.3s;
 		}
 
 		.form-control-custom:focus {
-			border-color: #38bdf8 !important;
-			box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15) !important;
+			border-color: #d97706 !important;
+			box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15) !important;
 			outline: none !important;
 		}
 
 		/* Helper Info Box */
 		.email-helper-box {
-			background: rgba(56, 189, 248, 0.06);
-			border-left: 3px solid #38bdf8;
+			background: rgba(217, 119, 6, 0.05);
+			border-left: 3px solid #d97706;
 			border-radius: 6px;
 			padding: 10px 12px;
 			margin-top: 8px;
 			font-size: 0.8rem;
-			color: #94a3b8;
+			color: #475569;
 			line-height: 1.4;
 		}
 
 		.email-helper-box strong {
-			color: #38bdf8;
+			color: #b45309;
+		}
+
+		.email-helper-box code {
+			background: rgba(217, 119, 6, 0.08);
+			color: #b45309;
+			padding: 2px 4px;
+			border-radius: 4px;
 		}
 
 		.email-helper-box ul {
@@ -184,7 +206,7 @@
 		}
 
 		.btn-submit {
-			background: linear-gradient(135deg, #38bdf8 0%, #4f46e5 100%);
+			background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
 			border: none;
 			border-radius: 10px;
 			padding: 12px;
@@ -192,13 +214,13 @@
 			font-weight: 600;
 			font-size: 1rem;
 			transition: all 0.3s;
-			box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2);
+			box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
 			cursor: pointer;
 		}
 
 		.btn-submit:hover {
 			transform: translateY(-2px);
-			box-shadow: 0 6px 20px rgba(56, 189, 248, 0.3);
+			box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
 			opacity: 0.95;
 		}
 
@@ -210,14 +232,14 @@
 			display: block;
 			text-align: center;
 			font-size: 0.85rem;
-			color: #94a3b8;
+			color: #64748b;
 			text-decoration: none;
 			transition: color 0.3s;
 			margin-top: 15px;
 		}
 
 		.link-forgot:hover {
-			color: #38bdf8;
+			color: #d97706;
 			text-decoration: none;
 		}
 
@@ -237,18 +259,18 @@
 			color: #ffffff;
 			border-radius: 12px;
 			padding: 16px;
-			box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+			box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 		}
 	</style>
 </head>
 
-<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+<nav class="navbar navbar-expand-lg navbar-light navbar-custom">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="/">
 			<i class="icon ion-ios-home-outline mr-2"></i>CAMPUSPRO
 		</a>
 		<div class="ml-auto">
-			<a href="/registration" class="btn btn-outline-info btn-sm px-3" style="border-radius: 8px;">Register</a>
+			<a href="/registration" class="btn btn-outline-warm btn-sm px-3" style="border-radius: 8px;">Register</a>
 		</div>
 	</div>
 </nav>
