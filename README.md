@@ -1,8 +1,8 @@
 # 🏫 CampusPro: College Management System
 
-[![Vercel Deployment](https://img.shields.io/badge/Vercel-Deployment-blue?style=for-the-badge&logo=vercel)](https://campus-pro-zfrb-jsklfghsq-saikrishna1124s-projects.vercel.app/)
+[![Vercel Deployment](https://img.shields.io/badge/Vercel-Deployment-blue?style=for-the-badge&logo=vercel)](https://campus-pro-p5fp.vercel.app/)
 
-🔗 **Live Link:** [https://campus-pro-zfrb-jsklfghsq-saikrishna1124s-projects.vercel.app/](https://campus-pro-zfrb-jsklfghsq-saikrishna1124s-projects.vercel.app/)
+🔗 **Live Link:** [https://campus-pro-p5fp.vercel.app/](https://campus-pro-p5fp.vercel.app/)
 
 An advanced, responsive **College Management System** built with Python, Django, and Bootstrap. CampusPro is designed to streamline administrative workflows, simplify student-staff communication, and provide intuitive dashboards for all user roles.
 
